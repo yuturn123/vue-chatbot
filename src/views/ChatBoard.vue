@@ -66,19 +66,31 @@
 </template>
 
 <script>
+import firebase from "@/firebase/firebase";
+
   export default {
-    created() {
+    async created() {
       //console.log("created call");
       this.user_id = this.$route.query.user_id;
       console.log("user_id", this.user_id);
+
+      const chatRef = firebase.firestore().collection("chats");
+      console.log("chatRef", chatRef);
+      const snapshot = await chatRef.get();
+      console.log("snapshot",snapshot);
+
+      snapshot.forEach(doc => {
+          console.log(doc.data().use_id,doc.data());
+          this.messages.push(doc.data());
+      })
     },
     data: () => ({
       messages:[
-        {message: "message 1"},
-        {message: "message 2"},
-        {message: "message 3"},
-        {message: "message 4"},
-        {message: "message 5"},
+        // {message: "message 1"},
+        // {message: "message 2"},
+        // {message: "message 3"},
+        // {message: "message 4"},
+        // {message: "message 5"},
       ],
       body: '',
       user_id: '',
