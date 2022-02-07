@@ -1,5 +1,6 @@
 <template>
   <v-app id="inspire">
+    <sidebar />
     <v-app-bar
       app
       shrink-on-scroll
@@ -37,10 +38,10 @@
 <script>
 // @ is an alias to /src
 
+import Sidebar from '@/components/layouts/Sidebar';
 export default {
-  name: 'Home',
-  components: {
-
-  }
+components: {
+  Sidebar
+}
 }
 </script>
